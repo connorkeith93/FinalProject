@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="weather.css">
+    <title>Current Weather</title>
+</head>
+<body>
+    <header>
+        <h1>The Weather Hub: Your Weather Forecast</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="CurrentWeather.html">Current Weather</a>
+        <a href="forecast.html">Future Forecast</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <div class="container">
+        <section class="weather-card">
+            <!-- Dropdown selection for locations -->
+            <h2>Current Weather</h2>
+            <label for="location">Select Location:</label>
+            <select id="location" onchange="updateWeather()">
+                <option value="location1">Indianapolis, IN</option>
+                <option value="location2">Chicago, IL</option>
+                <option value="location3">New York, NY</option>
+            </select>
+
+            <div class="weather-info" id="weather-info">
+                <!-- Current weather info updated when location is chosen -->
+            </div>
+        </section>
+    </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Weather Hub</p>
+    </footer>
+
+    <script>
+        function updateWeather() {
+            var selectedLocation = document.getElementById("location").value;
+            var weatherInfoContainer = document.getElementById("weather-info");
+
+            // Example weather data for two locations
+            var weatherData = {
+                location1: {
+                    temperature: '75°F',
+                    conditions: 'Sunny',
+                    icon: 'sunny-icon.png'
+                },
+                location2: {
+                    temperature: '60°F',
+                    conditions: 'Cloudy',
+                    icon: 'cloudy-icon.png'
+                },
+                location3: {
+                    temperature: '60°F',
+                    conditions: 'Rainy',
+                    icon: 'rainy-icon.png'
+                }
+                // Add more locations and their data as needed
+            };
+
+            // Get the weather information for the selected location
+            var selectedWeather = weatherData[selectedLocation];
+
+            // Update the DOM with the new weather data
+            weatherInfoContainer.innerHTML = `
+                <p>Temperature: ${selectedWeather.temperature}</p>
+                <p>Conditions: ${selectedWeather.conditions}</p>
+                <img src="${selectedWeather.icon}" alt="${selectedWeather.conditions}">
+            `;
+        }
+
+        window.onload = updateWeather;
+    </script>
+</body>
+</html>

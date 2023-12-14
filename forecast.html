@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="weather.css">
+    <title>7- Day Weather Forecast</title>
+</head>
+<body>
+    <header>
+        <h1>The Weather Hub: Your Weather Forecast</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="CurrentWeather.html">Current Weather</a>
+        <a href="forecast.html">7-Day Forecast</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+    <div class="container">
+        <section class="forecast-cards">
+            <!-- Label and dropdown menu for location selection-->
+            <label for="location">Select Location:</label>
+            <select id="location" onchange="updateForecast()">
+                <option value="location1">Indianapolis, IN</option>
+                <option value="location2">Chicago, IL</option>
+                <option value="location3">New York, NY</option>
+            </select>
+
+            <div class="forecast-card" id="forecast-info">
+                <!-- Forecast information will be updated here when location is chosen -->
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Weather Hub</p>
+    </footer>
+
+    <script>
+        // Function to update the forecast information based on the selected location
+        function updateForecast() {
+            // Get the value of the selected location from the dropdown
+            var selectedLocation = document.getElementById("location").value;
+            // Get the container where the forecast information will be displayed
+            var forecastInfoContainer = document.getElementById("forecast-info");
+
+            // Forecast Data for 3 locations (IND, CHI, NYC)
+            var forecastData = {
+                location1: [
+                    { day: 'Sunday', high: '78°F', low: '65°F', icon: 'sunny-icon.png' },
+                    { day: 'Monday', high: '80°F', low: '66°F', icon: 'cloudy-icon.png' },
+                    { day: 'Tuesday', high: '75°F', low: '62°F', icon: 'rainy-icon.png' },
+                    { day: 'Wednesday', high: '82°F', low: '68°F', icon: 'sunny-icon.png' },
+                    { day: 'Thursday', high: '79°F', low: '64°F', icon: 'cloudy-icon.png' },
+                    { day: 'Friday', high: '77°F', low: '63°F', icon: 'rainy-icon.png' },
+                    { day: 'Saturday', high: '76°F', low: '61°F', icon: 'sunny-icon.png' }
+                ],
+                location2: [
+                    { day: 'Sunday', high: '75°F', low: '60°F', icon: 'sunny-icon.png' },
+                    { day: 'Monday', high: '72°F', low: '58°F', icon: 'cloudy-icon.png' },
+                    { day: 'Tuesday', high: '78°F', low: '64°F', icon: 'rainy-icon.png' },
+                    { day: 'Wednesday', high: '80°F', low: '66°F', icon: 'sunny-icon.png' },
+                    { day: 'Thursday', high: '76°F', low: '62°F', icon: 'cloudy-icon.png' },
+                    { day: 'Friday', high: '74°F', low: '61°F', icon: 'rainy-icon.png' },
+                    { day: 'Saturday', high: '73°F', low: '60°F', icon: 'sunny-icon.png' }
+                ],
+                location3: [
+                    { day: 'Sunday', high: '70°F', low: '55°F', icon: 'sunny-icon.png' },
+                    { day: 'Monday', high: '68°F', low: '54°F', icon: 'cloudy-icon.png' },
+                    { day: 'Tuesday', high: '72°F', low: '58°F', icon: 'rainy-icon.png' },
+                    { day: 'Wednesday', high: '74°F', low: '60°F', icon: 'sunny-icon.png' },
+                    { day: 'Thursday', high: '71°F', low: '56°F', icon: 'cloudy-icon.png' },
+                    { day: 'Friday', high: '69°F', low: '55°F', icon: 'rainy-icon.png' },
+                    { day: 'Saturday', high: '68°F', low: '54°F', icon: 'sunny-icon.png' }
+                ]
+            };
+
+            // Get the forecast information for the selected location
+            var selectedForecast = forecastData[selectedLocation];
+
+            // Update the cards with the new forecast data
+            var forecastHTML = '<h2>7-Day Forecast</h2>';
+            selectedForecast.forEach(function(dayForecast) {
+                forecastHTML += `
+                    <div class="forecast-card">
+                        <p>${dayForecast.day}</p>
+                        <p>High: ${dayForecast.high}</p>
+                        <p>Low: ${dayForecast.low}</p>
+                        <img src="${dayForecast.icon}" alt="${dayForecast.day} Forecast">
+                    </div>
+                `;
+            });
+            forecastInfoContainer.innerHTML = forecastHTML;
+        }
+        // Allows weather info to auto-load upon entry of site
+        window.onload = updateForecast;
+    </script>
+</body>
+</html>
